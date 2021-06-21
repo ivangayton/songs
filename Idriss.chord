@@ -31,3 +31,7 @@ and the screams he carried [G]with him in the silence and they [D]drove him ever
 [G]You don't get to [D]say who we [A]are
 [G]We only de[D]mand that our [A]lives are our own
 [G]You don't get to [D]say who we [A]are
+
+{define: G base-fret 7 frets x x x 1 2 1 fingers 0 0 0 1 3 2}
+{define: D base-fret 7 frets x x 0 1 4 4 fingers 0 0 0 1 4 4}
+{define: A base-fret 7 frets x x x 3 4 3 fingers 0 0 0 1 3 2}
