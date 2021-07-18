@@ -3,7 +3,7 @@ vocal_melody = \relative c' {
   \clef treble
   \key a \minor
   \time 4/4
-  f'2 e8 r4 d8| e8( f) e c4 a8 r a~ | a8 a a8 r g8( a) r8 a | 
+  f'2 e8 r r e| d( e) f e( e) c( c) a( | a)  a a r g( a) r a
   c8( b) g c r b a( g) | a2 r |
   c8( b) g c r b a( g) | a2 r |
   r1 |
