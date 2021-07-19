@@ -23,30 +23,39 @@ bass_line = \relative c' {
   \clef bass
   \key a \minor
   \time 4/4
-  a,8 a'16 a, g' a a, a c' a, a a' a, a g' a
+  a,,8 a'16 a, g' a a, a c' a, a a' a, a g' a
   
 }
 
 text = \lyricmode {
-  I know that trouble is on the 
-  way you're not ready but
+  I know that trouble is on the way 
+  you're not ready but
   ready or not you're gonna ride
   ready or not you're gonna ride
 }
 
-harmonies = \chordmode {
+guitar_comp = \chordmode {
   a1:m a:m a:m a:m e2:m7 f:7+ e:m7 f:7+ e:m f:7+ g1:7
 }
 
 \score {
   <<
     \new ChordNames {
-      \set chordChanges = ##t
-      \harmonies
+      \set chordChanges = ##t % if no change, don't show
+      \guitar_comp
+    }
+    \new Staff \with {
+      instrumentName = "Vocal" shortInstrumentName = "Vx"
     }
     \new Voice = "vox" { \autoBeamOff R1*4 \vocal_melody }
     \new Lyrics \lyricsto "vox" \text
+    \new Staff \with {
+      instrumentName = "Guit" shortInstrumentName = "Gt"
+    }
     \new Voice = "guit" { \autoBeamOn \guitar_line \break }
+    \new Staff \with {
+      instrumentName = "Bass" shortInstrumentName = "Bs"
+    }
     \new Voice = "bass" { \autoBeamOn \bass_line \bass_line \break \bass_line \bass_line }
   >>
   \layout { }
