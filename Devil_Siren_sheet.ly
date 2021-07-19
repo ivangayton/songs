@@ -22,20 +22,13 @@ vocal_melody = \relative c' {
   r1 |
 }
 
+% Guitar
 line = {
   a8 \tuplet 3/1 { a d e } g a c a g a
   a,8 \tuplet 3/1 { a d e } g a c a c,4
   a8 \tuplet 3/1 { a d e } g a c a g,16 g gis8
   a d8( e) g a16 a c8 a4 
 }
-
-bass_intro = \relative c, {
-  \clef bass
-  \key a \minor
-  \time 4/4
-  \line
-}
-
 guitar_line = \relative c' {
   \clef treble
   \key a \minor
@@ -43,14 +36,38 @@ guitar_line = \relative c' {
   \tempo "Allegro" 4 = 115
   \line
 }
+intro_chords = \chordmode {
+  a1:m a:m a:m a:m
+}
+guitar_comp = \chordmode {
+  a1:m a:m a:m a:m e2:m7 f:7+ e:m7 f:7+ e:m f:7+ g1:7
+}
+funkstrum = {
+  < a c e a >16 r r < a c e a > r r < a c e a > r r < a c e a > r r < g c e a > < a c e a > r r
+}
+funkclimb = {
+  < e b' d g b >4 < e b' d g b >8 \deadNotesOn < e b' d g b >16 < e b' d g b > 
+  < e b' d g b > < e b' d g b > \deadNotesOff  < f c' e a >8 < f c' e a > r
+}
+guitar_rythm = \relative c'' {
+  \funkstrum \funkstrum \funkstrum \funkstrum
+  \funkclimb \funkclimb \funkclimb
+  < g d' f b >4 < g d' f b > < g d' f b > < g d' f b >
+}
 
+% Bass
 aslap = {
   a,8 a'16 a, g' a a, a c' a, a a' a, a g' a
 }
-eslap = {
-  e8 e, e'' e,,16 e e' f f f'8 f,16 f' f,
+eslap = \relative c {
+  e,8 e, e'' e,,16 e'' e, f f f'8 f16 f, f'
 }
-
+bass_intro = \relative c, {
+  \clef bass
+  \key a \minor
+  \time 4/4
+  \line
+}
 bass_line = \relative c {
   \clef bass
   \key a \minor
@@ -65,13 +82,6 @@ text = \lyricmode {
   you're not ready but
   ready or not you're gonna ride
   ready or not you're gonna ride
-}
-
-intro_chords = \chordmode {
-  a1:m a:m a:m a:m
-}
-guitar_comp = \chordmode {
-  a1:m a:m a:m a:m e2:m7 f:7+ e:m7 f:7+ e:m f:7+ g1:7
 }
 
 \score {
@@ -90,7 +100,7 @@ guitar_comp = \chordmode {
     \new Staff \with {
       instrumentName = "Guit" shortInstrumentName = "Gt"
     } <<
-      \new Voice = "guit" { \autoBeamOn \repeat volta 2 {\guitar_line } \break }
+      \new Voice = "guit" { \autoBeamOn \repeat volta 2 {\guitar_line } \break \guitar_rythm }
     >>
     \new Staff \with {
       instrumentName = "Bass" shortInstrumentName = "Bs"
