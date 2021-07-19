@@ -22,11 +22,7 @@ vocal_melody = \relative c' {
   r1 |
 }
 
-guitar_line = \relative c' {
-  \clef treble
-  \key a \minor
-  \time 4/4
-  \tempo "Allegro" 4 = 115
+line = {
   a8 \tuplet 3/1 { a d e } g a c a g a
   a,8 \tuplet 3/1 { a d e } g a c a c,4
   a8 \tuplet 3/1 { a d e } g a c a g,16 g gis8
@@ -37,22 +33,30 @@ bass_intro = \relative c, {
   \clef bass
   \key a \minor
   \time 4/4
-  a8 \tuplet 3/1 { a d e } g a c a g a
-  a,8 \tuplet 3/1 { a d e } g a c a c,4
-  a8 \tuplet 3/1 { a d e } g a c a g,16 g gis8
-  a d8( e) g a16 a c8 a4
+  \line
 }
+
+guitar_line = \relative c' {
+  \clef treble
+  \key a \minor
+  \time 4/4
+  \tempo "Allegro" 4 = 115
+  \line
+}
+
+aslap = {
+  a,8 a'16 a, g' a a, a c' a, a a' a, a g' a
+}
+eslap = {
+  e8 e, e'' e,,16 e e' f f f'8 f,16 f' f,
+}
+
 bass_line = \relative c {
   \clef bass
   \key a \minor
   \time 4/4
-  a,8 a'16 a, g' a a, a c' a, a a' a, a g' a
-  a,8 a'16 a, g' a a, a c' a, a a' a, a g' a
-  a,8 a'16 a, g' a a, a c' a, a a' a, a g' a
-  a,8 a'16 a, g' a a, a c' a, a a' a, a g' a
-  e8 e, e'' e,,16 e e' f f f'8 f,16 f' f,
-  e8 e, e'' e,,16 e e' f f f'8 f,16 f' f,
-  e8 e, e'' e,,16 e e' f f f'8 f,16 f' f,
+  \aslap \aslap \aslap \aslap
+  \eslap \eslap \eslap
   g8 g g' g, r g, g' g,
 }
 
@@ -63,29 +67,31 @@ text = \lyricmode {
   ready or not you're gonna ride
 }
 
+intro_chords = \chordmode {
+  a1:m a:m a:m a:m
+}
 guitar_comp = \chordmode {
   a1:m a:m a:m a:m e2:m7 f:7+ e:m7 f:7+ e:m f:7+ g1:7
 }
+
 \score {
   <<
     \new ChordNames {
       \set chordChanges = ##t % if no change, don't show
-      { R1*4 \guitar_comp }
+      { \intro_chords \guitar_comp }
     }
     \new Staff \with {
       instrumentName = "Vocal" shortInstrumentName = "Vx"
-      
     } <<
       \set Staff.explicitClefVisibility = #'#(#f #t #t)
-      \new Voice = "vox" { \autoBeamOff R1*4 \vocal_melody }
+      \new Voice = "vox" { \autoBeamOff R1*4 \repeat volta 2 { \vocal_melody } \break }
       \new Lyrics \lyricsto "vox" { \text }
     >>
     \new Staff \with {
       instrumentName = "Guit" shortInstrumentName = "Gt"
     } <<
-      \new Voice = "guit" { \autoBeamOn \guitar_line \break }
+      \new Voice = "guit" { \autoBeamOn \repeat volta 2 {\guitar_line } \break }
     >>
-    
     \new Staff \with {
       instrumentName = "Bass" shortInstrumentName = "Bs"
     } <<
