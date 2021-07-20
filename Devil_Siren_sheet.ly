@@ -47,9 +47,9 @@ funkstrum = {
   < a c e a > r r < a c e a > r < g c e a > < a c e a >
 }
 funkclimb = {
-  < e b' d g b >4 < e b' d g b >8 
-  \deadNotesOn < e b' d g b >16 < e b' d g b > 
-  < e b' d g b > < e b' d g b > \deadNotesOff  
+  < e b' d g >4 < e b' d g >8 
+  \deadNotesOn < e b' d g >16 < e b' d g > 
+  < e b' d g > < e b' d g > \deadNotesOff  
   < f c' e a >8 < f c' e a > r
 }
 guitar_rythm = \relative c'' {
