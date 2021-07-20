@@ -3,11 +3,11 @@
 \header {
   title = "Devil Siren"
   subtitle = "(Trouble is on the way)"
-  composer = "Ivan Gayton"
+  composer = "Mishima Band"
   tagline = \markup {
     \column {
       "Devil Siren by Ivan Gayton for Mishima Band,"
-      "Mishima Mura Iojima, Kagoshima, Japan 2021-07-19"
+      "Mishima Mura Iojima, Kagoshima, Japan 2021"
     }
   }
 }
@@ -43,16 +43,20 @@ guitar_comp = \chordmode {
   a1:m a:m a:m a:m e2:m7 f:7+ e:m7 f:7+ e:m f:7+ g1:7
 }
 funkstrum = {
-  < a c e a >16 r r < a c e a > r r < a c e a > r r < a c e a > r r < g c e a > < a c e a > r r
+  < a c e a >16 r r < a c e a > r r < a c e a > r r 
+  < a c e a > r r < a c e a > r < g c e a > < a c e a >
 }
 funkclimb = {
-  < e b' d g b >4 < e b' d g b >8 \deadNotesOn < e b' d g b >16 < e b' d g b > 
-  < e b' d g b > < e b' d g b > \deadNotesOff  < f c' e a >8 < f c' e a > r
+  < e b' d g b >4 < e b' d g b >8 
+  \deadNotesOn < e b' d g b >16 < e b' d g b > 
+  < e b' d g b > < e b' d g b > \deadNotesOff  
+  < f c' e a >8 < f c' e a > r
 }
 guitar_rythm = \relative c'' {
   \funkstrum \funkstrum \funkstrum \funkstrum
   \funkclimb \funkclimb \funkclimb
-  < g d' f b >4 < g d' f b > < g d' f b > < g d' f b >
+  < g d' f b >8 r < g d' f b > r 
+  < g d' f b > r < g d' f b > r
 }
 
 % Bass
@@ -94,23 +98,32 @@ text = \lyricmode {
       instrumentName = "Vocal" shortInstrumentName = "Vx"
     } <<
       \set Staff.explicitClefVisibility = #'#(#f #t #t)
-      \new Voice = "vox" { \autoBeamOff R1*4 \repeat volta 2 { \vocal_melody } \break }
+      \new Voice = "vox" { \autoBeamOff R1*4 
+                           \repeat volta 2 
+                           { \vocal_melody } 
+                           \break }
       \new Lyrics \lyricsto "vox" { \text }
     >>
     \new Staff \with {
       instrumentName = "Guit" shortInstrumentName = "Gt"
     } <<
-      \new Voice = "guit" { \autoBeamOn \repeat volta 2 {\guitar_line } \break \guitar_rythm }
+      \new Voice = "guit" { \autoBeamOn 
+                            \repeat volta 2 
+                            {\guitar_line } 
+                            \break 
+                            \guitar_rythm }
     >>
     \new Staff \with {
       instrumentName = "Bass" shortInstrumentName = "Bs"
     } <<
-      \new Voice = "bass" { \autoBeamOn \bass_intro \bass_line }
+      \new Voice = "bass" { \autoBeamOn \bass_intro 
+                            \bass_line }
     >> 
   >>
   \layout { 
     \context { \Staff \RemoveEmptyStaves }
-    \override Score.TimeSignature.break-visibility = #all-invisible
+    \override Score.TimeSignature.
+    break-visibility = #all-invisible
   }
   \midi { }
 }
