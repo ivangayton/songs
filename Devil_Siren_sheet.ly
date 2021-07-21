@@ -12,6 +12,7 @@
   }
 }
 
+% VOICE
 vocal_melody = \relative c' {
   \clef treble
   \key a \minor
@@ -21,6 +22,23 @@ vocal_melody = \relative c' {
   c8( b) g c r b a( g) | a2 r |
   r1 |
 }
+text = \lyricmode {
+  I know that trouble is on the way 
+  you're not ready but
+  ready or not you're gonna ride
+  ready or not you're gonna ride
+}
+voxstaff = \new Staff \with {
+  instrumentName = "Vocal" shortInstrumentName = "Vx"
+} <<
+  \set Staff.explicitClefVisibility = #'#(#f #t #t)
+  \new Voice = "vox" { \autoBeamOff R1*4
+                       \repeat volta 2 {
+                         \vocal_melody 
+                       }
+                       \break }
+  \new Lyrics \lyricsto "vox" { \text }
+>>
 
 % Guitar
 line = {
@@ -36,15 +54,9 @@ guitar_line = \relative c' {
   \tempo "Allegro" 4 = 115
   \line
 }
-intro_chords = \chordmode {
-  a1:m a:m a:m a:m
-}
-guitar_comp = \chordmode {
-  a1:m a:m a:m a:m e2:m7 f:7+ e:m7 f:7+ e:m f:7+ g1:7
-}
 funkstrum = {
   < a c e a >16 r r < a c e a > r r < a c e a > r r 
-  < a c e a > r r < a c e a > r < g c e a > < a c e a >
+  < a c e a > r r < a c e a > r < g c > < a c >
 }
 funkclimb = {
   < e b' d g >4 < e b' d g >8 
@@ -57,6 +69,26 @@ guitar_rythm = \relative c'' {
   \funkclimb \funkclimb \funkclimb
   < g d' f b >8 r < g d' f b > r 
   < g d' f b > r < g d' f b > r
+}
+guitstaff = \new Staff \with {
+  instrumentName = "Guit" shortInstrumentName = "Gt"
+  } <<
+    \new Voice = "guit" { \autoBeamOn 
+                          \repeat volta 2 {
+                            \guitar_line 
+                          }
+                          \break 
+                          \guitar_rythm }
+  >>
+intro_chords = \chordmode {
+  a1:m a:m a:m a:m
+}
+guitar_comp = \chordmode {
+  a1:m a:m a:m a:m e2:m7 f:7+ e:m7 f:7+ e:m f:7+ g1:7
+}
+guitchords = \new ChordNames {
+  \set chordChanges = ##t % if no change, don't show
+  { \intro_chords \guitar_comp }
 }
 
 % Bass
@@ -80,52 +112,33 @@ bass_line = \relative c {
   \eslap \eslap \eslap
   g8 g g' g, r g, g' g,
 }
-
-text = \lyricmode {
-  I know that trouble is on the way 
-  you're not ready but
-  ready or not you're gonna ride
-  ready or not you're gonna ride
-}
-
-\score {
-  <<
-    \new ChordNames {
-      \set chordChanges = ##t % if no change, don't show
-      { \intro_chords \guitar_comp }
-    }
-    \new Staff \with {
-      instrumentName = "Vocal" shortInstrumentName = "Vx"
-    } <<
-      \set Staff.explicitClefVisibility = #'#(#f #t #t)
-      \new Voice = "vox" { \autoBeamOff R1*4 
-                           \repeat volta 2 
-                           { \vocal_melody } 
-                           \break }
-      \new Lyrics \lyricsto "vox" { \text }
-    >>
-    \new Staff \with {
-      instrumentName = "Guit" shortInstrumentName = "Gt"
-    } <<
-      \new Voice = "guit" { \autoBeamOn 
-                            \repeat volta 2 
-                            {\guitar_line } 
-                            \break 
-                            \guitar_rythm }
-    >>
-    \new Staff \with {
+bassstaff = \new Staff \with {
       instrumentName = "Bass" shortInstrumentName = "Bs"
     } <<
       \new Voice = "bass" { \autoBeamOn \bass_intro 
                             \bass_line }
-    >> 
+    >>
+
+% SCORES (separate for layout and midi for repeats)
+\score {
+  <<
+    \guitchords
+    \voxstaff
+    \guitstaff 
+    \bassstaff
   >>
   \layout { 
     \context { \Staff \RemoveEmptyStaves }
     \override Score.TimeSignature.
     break-visibility = #all-invisible
   }
-  \midi { }
 }
 
-
+\score {
+  \unfoldRepeats {
+    \voxstaff
+    \guitstaff
+    \bassstaff
+  }
+  \midi { }
+}
