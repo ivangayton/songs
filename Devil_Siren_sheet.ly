@@ -51,7 +51,6 @@ guitar_line = \relative c' {
   \clef treble
   \key a \minor
   \time 4/4
-  \tempo "Allegro" 4 = 115
   \line
 }
 funkstrum = {
@@ -65,20 +64,37 @@ funkclimb = {
   < f c' e a >8 < f c' e a > r
 }
 guitar_rythm = \relative c'' {
-  \funkstrum \funkstrum \funkstrum \funkstrum
-  \funkclimb \funkclimb \funkclimb
+  \repeat percent 4 \funkstrum \noBreak
+  \break
+  \repeat percent 3 \funkclimb 
   < g d' f b >8 r < g d' f b > r 
   < g d' f b > r < g d' f b > r
+}
+bridge = \relative c' {
+  \repeat percent 2 { 
+    < e b' e >8 < e b' e > r4
+    < g d' g >8 < g d' g > r4
+    < d a' d >8 < d a' d > r4
+    < f c' f >8 < f c' f > r4
+  }
 }
 guitstaff = \new Staff \with {
   instrumentName = "Guit" shortInstrumentName = "Gt"
   } <<
+    \tempo "Allegro" 4 = 115
     \new Voice = "guit" { \autoBeamOn 
+                          \repeat volta 2 {
+                            \bar ".|:"
+                            \guitar_line 
+                          }  
+                          \break 
+                          \guitar_rythm 
                           \repeat volta 2 {
                             \guitar_line 
                           }
-                          \break 
-                          \guitar_rythm }
+                          \break
+                          \bridge
+    }
   >>
 intro_chords = \chordmode {
   a1:m a:m a:m a:m
@@ -108,8 +124,8 @@ bass_line = \relative c {
   \clef bass
   \key a \minor
   \time 4/4
-  \aslap \aslap \aslap \aslap
-  \eslap \eslap \eslap
+  \repeat percent 4 \aslap 
+  \repeat percent 3 \eslap 
   g8 g g' g, r g, g' g,
 }
 bassstaff = \new Staff \with {
@@ -122,7 +138,7 @@ bassstaff = \new Staff \with {
 % SCORES (separate for layout and midi for repeats)
 \score {
   <<
-    \guitchords
+    \guitchords 
     \voxstaff
     \guitstaff 
     \bassstaff
