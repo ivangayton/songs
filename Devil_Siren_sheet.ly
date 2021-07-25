@@ -127,6 +127,11 @@ bass_line = \relative c {
   \repeat percent 4 \aslap 
   \repeat percent 3 \eslap 
   g8 g g' g, r g, g' g,
+  \repeat percent 4 \aslap
+  \repeat percent 2 {
+    e8 e r4 g8 g r4 d8 d r4 f8 f r4
+  }
+  
 }
 bassstaff = \new Staff \with {
       instrumentName = "Bass" shortInstrumentName = "Bs"
