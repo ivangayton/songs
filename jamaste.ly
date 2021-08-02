@@ -12,11 +12,27 @@
   }
 }
 
-verse = \relative c' {
-  \clef treble
+fingerchords = {
+  < d e'\3 a\2 >1 < d c'\3 g'\2 > < fis d'\3 fis > < g c d g >
+}
+guitstaff = \new Staff {
+  \clef "treble_8"
   \key g \major
   \time 4/4
-  < d e' a >1 < d c' g' > < fis d' fis > < g c d g > 
+  \omit Voice.StringNumber
+  \relative c {
+    \fingerchords
+  }
+}
+tabstaff = \new TabStaff \relative c {
+   \fingerchords
 }
 
-{ \verse }
+\score {
+  <<
+    \new StaffGroup <<
+      \guitstaff
+      \tabstaff
+    >>
+  >>
+}

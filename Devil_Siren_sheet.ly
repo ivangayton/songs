@@ -106,6 +106,19 @@ guitchords = \new ChordNames {
   \set chordChanges = ##t % if no change, don't show
   { \intro_chords \guitar_comp }
 }
+guittabstaff = \new TabStaff {
+  \repeat volta 2 {
+    \bar ".|:"
+    \guitar_line 
+  }
+  \break 
+  \guitar_rythm 
+  \repeat volta 2 {
+    \guitar_line 
+  }
+  \break
+  \bridge
+}
 
 % Bass
 aslap = {
@@ -145,7 +158,8 @@ bassstaff = \new Staff \with {
   <<
     \guitchords 
     \voxstaff
-    \guitstaff 
+    \guitstaff
+    \guittabstaff
     \bassstaff
   >>
   \layout { 
