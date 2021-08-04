@@ -17,6 +17,8 @@ compchords = \new ChordNames \chordmode {
   %\set chordChanges = ##t % if no change, don't show
   a2 gis:m fis:m e d e a1 \break
   a2 gis:m fis:m e d e a1 \break
+  fis2 cis d4 e a2 d cis fis1 \break
+  fis2 cis d e a4 d2 cis fis1
 }
 
 % Bass
@@ -32,6 +34,13 @@ bass_verse = \relative {
 }
 bass_bridge = \relative {
   fis,8 fis r16 b,16 c cis8 cis' r16 cis,8 r16 r16 
+  d8\3 d\3 r16 e8.\3 a,8\4 a'\2 r16 e\3 dis8\3 |
+  d8\3 d\3 r16 d8.\3 e4\3 d\3 |
+  cis8\3 cis\3 r16 e16\2 f8\2 fis16\2 cis\3 fis,8\4 r16 fis'8.\2 |
+  fis,8 fis a b cis r8 e4\3 |
+  d8\3 d\3 e\3 e\3 a,\4 a'\2 r16 e16\3 dis8\3 |
+  d8\3 d\3 r16 a16\4 d8\3 cis8 cis r16 e16 f8 |
+  fis8 fis r16 cis16 fis8 fis,4 r4 |
 }
 bass_line = {
   \bass_intro
