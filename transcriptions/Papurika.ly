@@ -30,9 +30,13 @@ bass_verse = \relative {
   d8\3 d\3 \slashedGrace { e\3\glissando } fis\3 b,\4 e\3 r8 r16 b\4 e\3 r |
   a,8\4 e'\3 \slashedGrace { a\2\glissando } b\2 e,\3 a,4\4 r4 | 
 }
+bass_bridge = \relative {
+  fis,8 fis r16 b,16 c cis8 cis' r16 cis,8 r16 r16 
+}
 bass_line = {
   \bass_intro
   \bass_verse
+  \bass_bridge
 }
 
   
@@ -43,7 +47,8 @@ bassstaff = \new Staff \with {
       \new Voice {
         \omit Voice.StringNumber
         \clef "bass_8"
-          \bass_line
+        \key a \major
+        \bass_line
       }
     >>
 
