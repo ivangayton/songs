@@ -13,16 +13,28 @@
   }
 }
 
-compchords = \new ChordNames {
-  \set chordChanges = ##t % if no change, don't show
-  r1 a2 gis fis e
+compchords = \new ChordNames \chordmode {
+  %\set chordChanges = ##t % if no change, don't show
+  a2 gis:m fis:m e d e a1 \break
+  a2 gis:m fis:m e d e a1 \break
 }
 
 % Bass
-bass_line = \relative {
+bass_intro = \relative {
+  r1 r1 r1 
   r2 r8 fis,16 g\2 gis\2 e8.\3
-  a,8\4 e'\3 \slashedGrace { a\2\glissando } b\2 a\2 gis\2 e\3 r16 e\3 gis8\2
 }
+bass_verse = \relative {
+  a,,8\4 e'\3 \slashedGrace { a\2\glissando } b\2 a\2 gis\2 e\3 r16 e\3 gis8\2 |
+  fis8\3 fis\3 r16 fis8.\3 e8\3 r r16 b\4 e8\3 |
+  d8\3 d\3 \slashedGrace { e\3\glissando } fis\3 b,\4 e\3 r8 r16 b\4 e\3 r |
+  a,8\4 e'\3 \slashedGrace { a\2\glissando } b\2 e,\3 a,4\4 r4 | 
+}
+bass_line = {
+  \bass_intro
+  \bass_verse
+}
+
   
 bassstaff = \new Staff \with {
   instrumentName = "Bass" shortInstrumentName = "Bs"
@@ -31,7 +43,7 @@ bassstaff = \new Staff \with {
       \new Voice {
         \omit Voice.StringNumber
         \clef "bass_8"
-          \bass_line 
+          \bass_line
       }
     >>
 
