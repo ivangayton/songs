@@ -53,6 +53,7 @@ bassstaff = \new Staff \with {
   instrumentName = "Bass" shortInstrumentName = "Bs"
 } 
     <<
+      \tempo "Allegretto" 4 = 101
       \new Voice {
         \omit Voice.StringNumber
         \clef "bass_8"
@@ -68,7 +69,6 @@ basstabstaff = \new TabStaff \with {
   \bass_line
 }
 
-% SCORES (separate for layout and midi for repeats)
 \score {
   <<
     \compchords 
@@ -80,5 +80,12 @@ basstabstaff = \new TabStaff \with {
     \override Score.TimeSignature.
     break-visibility = #all-invisible
   }
+}
+
+\score {
+  \unfoldRepeats {
+    \bassstaff
+  }
+  \midi { }
 }
 

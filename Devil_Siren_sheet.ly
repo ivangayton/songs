@@ -47,8 +47,7 @@ line = {
   a8 \tuplet 3/1 { a d e } g a c a g,16 g gis8
   a d8( e) g a16 a c8 a4 
 }
-guitar_line = \relative c' {
-  \clef treble
+guitar_line = \relative c {
   \key a \minor
   \time 4/4
   \line
@@ -63,14 +62,14 @@ funkclimb = {
   < e b' d g > < e b' d g > \deadNotesOff  
   < f c' e a >8 < f c' e a > r
 }
-guitar_rythm = \relative c'' {
+guitar_rythm = \relative c' {
   \repeat percent 4 \funkstrum \noBreak
   \break
   \repeat percent 3 \funkclimb 
   < g d' f b >8 r < g d' f b > r 
   < g d' f b > r < g d' f b > r
 }
-bridge = \relative c' {
+bridge = \relative {
   \repeat percent 2 { 
     < e b' e >8 < e b' e > r4
     < g d' g >8 < g d' g > r4
@@ -82,18 +81,20 @@ guitstaff = \new Staff \with {
   instrumentName = "Guit" shortInstrumentName = "Gt"
   } <<
     \tempo "Allegro" 4 = 115
-    \new Voice = "guit" { \autoBeamOn 
-                          \repeat volta 2 {
-                            \bar ".|:"
-                            \guitar_line 
-                          }  
-                          \break 
-                          \guitar_rythm 
-                          \repeat volta 2 {
-                            \guitar_line 
-                          }
-                          \break
-                          \bridge
+    \new Voice = "guit" { 
+      \clef "treble_8"
+      \autoBeamOn 
+      \repeat volta 2 {
+        \bar ".|:"
+        \guitar_line 
+      }
+      \break 
+      \guitar_rythm
+      \repeat volta 2 {
+        \guitar_line 
+      }
+      \break
+      \bridge
     }
   >>
 intro_chords = \chordmode {
@@ -106,7 +107,9 @@ guitchords = \new ChordNames {
   \set chordChanges = ##t % if no change, don't show
   { \intro_chords \guitar_comp }
 }
-guittabstaff = \new TabStaff {
+guittabstaff = \new TabStaff \with {
+  stringTunings = #guitar-tuning
+}{
   \repeat volta 2 {
     \bar ".|:"
     \guitar_line 
@@ -128,13 +131,11 @@ eslap = \relative c {
   e,8 e, e'' e,,16 e'' e, f f f'8 f16 f, f'
 }
 bass_intro = \relative c, {
-  \clef bass
   \key a \minor
   \time 4/4
   \line
 }
 bass_line = \relative c {
-  \clef bass
   \key a \minor
   \time 4/4
   \repeat percent 4 \aslap 
@@ -149,9 +150,19 @@ bass_line = \relative c {
 bassstaff = \new Staff \with {
       instrumentName = "Bass" shortInstrumentName = "Bs"
     } <<
-      \new Voice = "bass" { \autoBeamOn \bass_intro 
-                            \bass_line }
+      \new Voice = "bass" { 
+        \clef "bass_8"
+        \autoBeamOn 
+        \bass_intro 
+        \bass_line }
     >>
+basstabstaff = \new TabStaff \with {
+  stringTunings = #bass-tuning
+}{
+  %\bar ".|:"
+  \bass_intro
+  \bass_line
+}
 
 % SCORES (separate for layout and midi for repeats)
 \score {
@@ -161,6 +172,7 @@ bassstaff = \new Staff \with {
     \guitstaff
     \guittabstaff
     \bassstaff
+    \basstabstaff
   >>
   \layout { 
     \context { \Staff \RemoveEmptyStaves }
