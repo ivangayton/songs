@@ -18,11 +18,14 @@ compchords = \new ChordNames \chordmode {
   a2 gis:m fis:m e d e a1 \break
   a2 gis:m fis:m e d e a1 \break
   fis2 cis d4 e a2 d cis fis1 \break
-  fis2 cis d e a4 d2 cis fis1
-}
+  fis2 cis d e a4 d2 cis fis1 
+  fis2 cis d e a4 d2 cis fis1 
+  
+ }
 
 % Bass
 bass_intro = \relative {
+  \key a \major
   r1 r1 r1 
   r2 r8 fis,16 g\2 gis\2 e8.\3
 }
@@ -42,10 +45,18 @@ bass_bridge = \relative {
   d8\3 d\3 r16 a16\4 d8\3 cis8 cis r16 e16 f8 |
   fis8 fis r16 cis16 fis8 fis,4 r4 |
 }
+bass_chorus = \relative c, {
+  b8\3 b'8\1 r16 b,16\3 c8\3 cis\3 cis\1 r8 \deadNote cis8\3 |
+  cis8\3 cis'\1 r16 cis,16\3 d8\3 dis\3 dis'\1 cis,8\3 cis'\1 |
+  b,8\3 b'8\1 r16 b,16\3 cis8\3 fis,\4 fis'\2 r16 fis,16 r8 |
+  ais8 ais r16 ais8 dis\3 dis\3 
+%  bes8\4 bes\4 r16 bes16\4 bes8\4 ees\3 ees\3 des\3 des\3 |
+}
 bass_line = {
   \bass_intro
   \bass_verse
   \bass_bridge
+  \bass_chorus
 }
 
   
@@ -57,7 +68,6 @@ bassstaff = \new Staff \with {
       \new Voice {
         \omit Voice.StringNumber
         \clef "bass_8"
-        \key a \major
         \bass_line
       }
     >>
