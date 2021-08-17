@@ -17,9 +17,12 @@ compchords = \new ChordNames \chordmode {
   %\set chordChanges = ##t % if no change, don't show
   a2 gis:m fis:m e d e a1 \break
   a2 gis:m fis:m e d e a1 \break
-  fis2 cis d4 e a2 d cis fis1 \break
-  fis2 cis d e a4 d2 cis fis1 
-  fis2 cis d e a4 d2 cis fis1 
+  fis2:m cis:m7 d4 e a2 d e cis:7 fis:m \break
+  fis2:m cis:m7 d4 e a2 d2 cis:7 fis1 \break
+  b2 cis cis dis:m b fis ais:7 dis:m \break
+  b2 cis cis fis dis gis:7 b4 cis4 fis2
+  r1
+  a2 e fis:m e d e a1
   
  }
 
